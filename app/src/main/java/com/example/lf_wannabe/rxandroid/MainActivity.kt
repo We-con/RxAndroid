@@ -12,6 +12,9 @@ import android.widget.Toast
 import com.example.lf_wannabe.rxandroid.recyclerview.PostAdapter
 import com.example.lf_wannabe.rxandroid.model.Post
 import com.example.lf_wannabe.rxandroid.recyclerview.ListAdapterWithHeader
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -100,7 +103,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun read(){
-        getPosts()
+//        getPosts()
     }
 
     private fun delete(){
@@ -108,36 +111,39 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext,
                     "select a post to delete", Toast.LENGTH_SHORT).show()
         else {
-            deletePost()
+//            deletePost()
             selectedID = -1
         }
     }
 
     fun getPosts() {
-        var call: Call<List<Post>> = BaseApplication.customService.getPosts()
-        call.enqueue(object: Callback<List<Post>>{
-            override fun onResponse(call: Call<List<Post>>?, response: Response<List<Post>>?) {
-                var list = response!!.body() as ArrayList<Post>
-                postAdapter.setData(list)
-            }
-
-            override fun onFailure(call: Call<List<Post>>?, t: Throwable?) {
-                Log.d("MIM", "호출 실패!")
-            }
-        })
+        var call: Observable<List<Post>> = BaseApplication.customService.getPosts()
+        call.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { list -> postAdapter.setData(list as ArrayList<Post>) }
+//        call.enqueue(object: Callback<List<Post>>{
+//            override fun onResponse(call: Call<List<Post>>?, response: Response<List<Post>>?) {
+//                var list = response!!.body() as ArrayList<Post>
+//                postAdapter.setData(list)
+//            }
+//
+//            override fun onFailure(call: Call<List<Post>>?, t: Throwable?) {
+//                Log.d("MIM", "호출 실패!")
+//            }
+//        })
     }
 
-    fun deletePost() {
-        var call: Call<Post> = BaseApplication.customService.deletePost(Post(selectedID))
-        call.enqueue(object : Callback<Post>{
-            override fun onResponse(call: Call<Post>?, response: Response<Post>?) {
-                getPosts()
-            }
-            override fun onFailure(call: Call<Post>?, t: Throwable?) {
-                Log.d("MIM_REST_D", "delete fail")
-            }
-        })
-    }
+//    fun deletePost() {
+//        var call: Call<Post> = BaseApplication.customService.deletePost(Post(selectedID))
+//        call.enqueue(object : Callback<Post>{
+//            override fun onResponse(call: Call<Post>?, response: Response<Post>?) {
+//                getPosts()
+//            }
+//            override fun onFailure(call: Call<Post>?, t: Throwable?) {
+//                Log.d("MIM_REST_D", "delete fail")
+//            }
+//        })
+//    }
     override fun onResume() {
         super.onResume()
         getPosts()
