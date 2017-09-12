@@ -23,18 +23,17 @@ class CrtPostActivity : AppCompatActivity(){
 
         send_btn.setOnClickListener {
             // write api 호출할 때 id가 애매하네, 받을때는 필요한데
-//            writePost(Post(-1,"${title_input.text}", "${author_input.text}"))
+            writePost(Post(-1,"${title_input.text}", "${author_input.text}"))
             finish()
         }
 
     }
 
-//    fun writePost(post: Post){
-//        var call: Observable<Post> = BaseApplication.customService.writePost(post)
-//
-//        call.subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .map { post ->  Observable.fromArray(post) }
-//                .subscribe { post -> Log.d("MIM_POST", "onResponse") }
-//    }
+    fun writePost(post: Post){
+        var call: Observable<List<Post>> = BaseApplication.customService.writePost(post)
+
+        call.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { post -> Log.d("MIM_POST", "onResponse") }
+    }
 }

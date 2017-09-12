@@ -28,8 +28,8 @@ interface CustomService {
     fun getPosts(): Observable<List<Post>>
 
     @POST("/write")
-    fun writePost(@Body post: Post): Observable<Post>
+    fun writePost(@Body post: Post): Observable<List<Post>>
 
     @POST("/delete")
-    fun deletePost(@Body post:Post): Observable<Post>
+    fun deletePost(@Body post:Post): Observable<List<Post>>
 }

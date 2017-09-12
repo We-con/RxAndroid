@@ -13,12 +13,11 @@ import com.example.lf_wannabe.rxandroid.recyclerview.PostAdapter
 import com.example.lf_wannabe.rxandroid.model.Post
 import com.example.lf_wannabe.rxandroid.recyclerview.ListAdapterWithHeader
 import io.reactivex.Observable
+import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     var selectedID: Int = -1
@@ -103,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun read(){
-//        getPosts()
+        getPosts()
     }
 
     private fun delete(){
@@ -111,7 +110,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext,
                     "select a post to delete", Toast.LENGTH_SHORT).show()
         else {
-//            deletePost()
+            deletePost()
             selectedID = -1
         }
     }
@@ -120,7 +119,7 @@ class MainActivity : AppCompatActivity() {
         var call: Observable<List<Post>> = BaseApplication.customService.getPosts()
         call.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { list -> postAdapter.setData(list as ArrayList<Post>) }
+                .subscribe { postList -> postAdapter.setData(postList as ArrayList<Post>) }
 //        call.enqueue(object: Callback<List<Post>>{
 //            override fun onResponse(call: Call<List<Post>>?, response: Response<List<Post>>?) {
 //                var list = response!!.body() as ArrayList<Post>
@@ -133,8 +132,13 @@ class MainActivity : AppCompatActivity() {
 //        })
     }
 
-//    fun deletePost() {
-//        var call: Call<Post> = BaseApplication.customService.deletePost(Post(selectedID))
+    fun deletePost() {
+        var call: Observable<List<Post>> = BaseApplication.customService.deletePost(Post(selectedID))
+
+        call.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { postList -> postAdapter.setData(postList as ArrayList<Post>) }
+
 //        call.enqueue(object : Callback<Post>{
 //            override fun onResponse(call: Call<Post>?, response: Response<Post>?) {
 //                getPosts()
@@ -143,9 +147,11 @@ class MainActivity : AppCompatActivity() {
 //                Log.d("MIM_REST_D", "delete fail")
 //            }
 //        })
-//    }
+    }
     override fun onResume() {
         super.onResume()
+
+        //흐음.. 마음에 안드는데.. 포스트를 다른 Activity에서 생성하는 구조에서는 어쩔 수 없는건가..
         getPosts()
     }
 }
