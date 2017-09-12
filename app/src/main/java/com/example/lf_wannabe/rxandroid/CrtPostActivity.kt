@@ -21,9 +21,9 @@ class CrtPostActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crt_post)
 
-        send_btn.setOnClickListener {
+        sendBtn.setOnClickListener {
             // write api 호출할 때 id가 애매하네, 받을때는 필요한데
-            writePost(Post(-1,"${title_input.text}", "${author_input.text}"))
+            writePost(Post(-1,"${titleInput.text}", "${authorInput.text}"))
             finish()
         }
 

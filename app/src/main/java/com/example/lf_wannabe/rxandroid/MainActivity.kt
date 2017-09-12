@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity() {
 
     fun setFabActions() {
         fabs = ArrayList<FloatingActionButton>().apply {
-            add(fab_action_c)
-            add(fab_action_r)
-            add(fab_action_d)
+            add(fabActionC)
+            add(fabActionR)
+            add(fabActionD)
         }
         fab.setOnClickListener(fabListener(-1))
         for((index, fab) in fabs.withIndex()) fab.setOnClickListener(fabListener(index))
