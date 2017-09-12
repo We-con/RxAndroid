@@ -1,4 +1,4 @@
-package com.example.lf_wannabe.retrofitexample.model
+package com.example.lf_wannabe.rxandroid.model
 
 /**
  * Created by lf_wannabe on 05/09/2017.

@@ -1,4 +1,4 @@
-package com.example.lf_wannabe.retrofitexample.recyclerview
+package com.example.lf_wannabe.rxandroid.recyclerview
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

@@ -1,6 +1,6 @@
-package com.example.lf_wannabe.retrofitexample
+package com.example.lf_wannabe.rxandroid
 
-import com.example.lf_wannabe.retrofitexample.model.Post
+import com.example.lf_wannabe.rxandroid.model.Post
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

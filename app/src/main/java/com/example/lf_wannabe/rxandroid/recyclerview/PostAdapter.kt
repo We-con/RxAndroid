@@ -1,10 +1,10 @@
-package com.example.lf_wannabe.retrofitexample.recyclerview
+package com.example.lf_wannabe.rxandroid.recyclerview
 
 import android.support.v4.app.FragmentActivity
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.example.lf_wannabe.retrofitexample.R
-import com.example.lf_wannabe.retrofitexample.model.Post
+import com.example.lf_wannabe.rxandroid.R
+import com.example.lf_wannabe.rxandroid.model.Post
 
 /**
  * Created by lf_wannabe on 05/09/2017.

@@ -1,8 +1,7 @@
-package com.example.lf_wannabe.retrofitexample.recyclerview
+package com.example.lf_wannabe.rxandroid.recyclerview
 
 import android.view.View
-import android.widget.Toast
-import com.example.lf_wannabe.retrofitexample.model.Post
+import com.example.lf_wannabe.rxandroid.model.Post
 import kotlinx.android.synthetic.main.layout_post.view.*
 
 /**

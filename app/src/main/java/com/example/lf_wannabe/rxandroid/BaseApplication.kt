@@ -1,4 +1,4 @@
-package com.example.lf_wannabe.retrofitexample
+package com.example.lf_wannabe.rxandroid
 
 import android.app.Application
 

@@ -1,9 +1,9 @@
-package com.example.lf_wannabe.retrofitexample
+package com.example.lf_wannabe.rxandroid
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import com.example.lf_wannabe.retrofitexample.model.Post
+import com.example.lf_wannabe.rxandroid.model.Post
 import kotlinx.android.synthetic.main.activity_crt_post.*
 import retrofit2.Call
 import retrofit2.Callback
