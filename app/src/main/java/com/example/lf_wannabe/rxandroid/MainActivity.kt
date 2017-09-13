@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
@@ -13,9 +12,7 @@ import com.example.lf_wannabe.rxandroid.recyclerview.PostAdapter
 import com.example.lf_wannabe.rxandroid.model.Post
 import com.example.lf_wannabe.rxandroid.recyclerview.ListAdapterWithHeader
 import io.reactivex.Observable
-import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -120,16 +117,6 @@ class MainActivity : AppCompatActivity() {
         call.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { postList -> postAdapter.setData(postList as ArrayList<Post>) }
-//        call.enqueue(object: Callback<List<Post>>{
-//            override fun onResponse(call: Call<List<Post>>?, response: Response<List<Post>>?) {
-//                var list = response!!.body() as ArrayList<Post>
-//                postAdapter.setData(list)
-//            }
-//
-//            override fun onFailure(call: Call<List<Post>>?, t: Throwable?) {
-//                Log.d("MIM", "호출 실패!")
-//            }
-//        })
     }
 
     fun deletePost() {
@@ -138,15 +125,6 @@ class MainActivity : AppCompatActivity() {
         call.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { postList -> postAdapter.setData(postList as ArrayList<Post>) }
-
-//        call.enqueue(object : Callback<Post>{
-//            override fun onResponse(call: Call<Post>?, response: Response<Post>?) {
-//                getPosts()
-//            }
-//            override fun onFailure(call: Call<Post>?, t: Throwable?) {
-//                Log.d("MIM_REST_D", "delete fail")
-//            }
-//        })
     }
     override fun onResume() {
         super.onResume()
